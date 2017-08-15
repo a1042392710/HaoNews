@@ -1,0 +1,7 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    // 复写这个dimen 配置 ，这个是Bottom控件图标与文字的间距
+    <dimen name="fixed_height_bottom_padding">6dp</dimen>
+</resources>

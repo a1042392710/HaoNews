@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--设置沉浸式状态栏-->
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--窗口半透明的状态-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--窗口半透明的导航-->
+        <item name="android:windowTranslucentNavigation">false</item>
+
+    </style>
+</resources>
