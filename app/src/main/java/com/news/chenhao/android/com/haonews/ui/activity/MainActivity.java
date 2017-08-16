@@ -31,8 +31,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected int getResViewId() {
         return R.layout.activity_main;
-    }
 
+    }
     @Override
     protected BasePresenter getPresenter() {
         return null;
