@@ -46,9 +46,9 @@ public class MainActivity extends BaseActivity {
         //给已经设置为透明的状态，填充一个有颜色的View 来达到变色效果
         addWindowsView();
         bottonBar
-                .addItem(new BottomNavigationItem(R.drawable.home_off, "首页"))
-                .addItem(new BottomNavigationItem(R.drawable.anecdotes_on, "趣闻"))
-                .addItem(new BottomNavigationItem(R.drawable.setting_off, "设置"))
+                .addItem(new BottomNavigationItem(R.drawable.home_off, "首页").setInActiveColor("#212121"))
+                .addItem(new BottomNavigationItem(R.drawable.anecdotes_on, "趣闻").setInActiveColor("#212121"))
+                .addItem(new BottomNavigationItem(R.drawable.setting_off, "设置").setInActiveColor("#212121"))
                 .setFirstSelectedPosition(0)
                 .initialise();
 //        bottonBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE);  点击的时候有水波纹，然后变色
