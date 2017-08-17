@@ -1,0 +1,57 @@
+package com.news.chenhao.android.com.haonews.ui.fragment;
+
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.news.chenhao.android.com.haonews.R;
+import com.news.chenhao.android.com.haonews.base.BaseFragment;
+import com.news.chenhao.android.com.haonews.base.BasePresenter;
+import com.news.chenhao.android.com.haonews.until.AnimationUtil;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
+/**
+ * Created by chenhao on 2017/8/17.
+ */
+
+public class FragmentHome extends BaseFragment {
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.imgProgress)
+    ImageView imgProgress;
+    @BindView(R.id.relativelayout)
+    RelativeLayout relativelayout;
+    Unbinder unbinder;
+    Unbinder unbinder1;
+
+    @Override
+    protected BasePresenter getPresenter() {
+        return null;
+    }
+
+    @Override
+    protected int getViewResId() {
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    protected void initData(Bundle savedInstanceState) {
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+
+    @OnClick(R.id.imgProgress)
+    public void onViewClicked() {
+        AnimationUtil.rotationAnimation(imgProgress);
+    }
+}

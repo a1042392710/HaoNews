@@ -52,6 +52,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         attach(context);
     }
 
+
+
     private void attach(Context context) {
         mContext = context;
         mApp = (BaseApplication) context.getApplicationContext();
@@ -65,7 +67,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         if (mRootView == null) {
             mRootView = inflater.inflate(getViewResId(), container, false);
         }
@@ -211,7 +214,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     ///////////////////////////////////////////////////////////////////////////
     protected void hideKeyboard() {
         if (((BaseActivity) mContext).getCurrentFocus() != null) {
-            im.hideSoftInputFromWindow(((BaseActivity) mContext).getCurrentFocus().getApplicationWindowToken(),
+            im.hideSoftInputFromWindow(((BaseActivity) mContext).getCurrentFocus()
+                            .getApplicationWindowToken(),
                     InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }

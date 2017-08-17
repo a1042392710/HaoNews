@@ -2,6 +2,7 @@ package com.news.chenhao.android.com.haonews.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,9 +11,13 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.news.chenhao.android.com.haonews.R;
 
 import java.lang.ref.WeakReference;
 
@@ -41,7 +46,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         mApp = (BaseApplication) getApplication();
         mApp.addActivity(this);
         mContext = this;
-//        translucentStatusBar(); //状态栏
+        translucentStatusBar(); //透明状态栏状态栏
         setContentView(getResViewId());
         ButterKnife.bind(this);//注解框架的实例化
         im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);//输入法管理器实例化
@@ -96,7 +101,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     /**
-     * 设置沉浸式状状栏
+     * 设置沉浸式状状栏       两种方式 ，一种设置style 一种代码
      */
     private void translucentStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
@@ -162,7 +167,29 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             }
         }
     }
+    /**
+     *  创建View并添加到状态栏
+     */
+    protected void addWindowsView() {
 
+        View view = new View(mContext);
+        view.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams
+                .MATCH_PARENT,
+                getStatusBarHeight());
+        ViewGroup decorView = (ViewGroup) findViewById(android.R.id.content);
+        decorView.addView(view, params);
+    }
+
+    /**
+     *  获得顶部ActionBar 的高度
+     */
+    protected int getStatusBarHeight() {
+        Resources resources = mContext.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        return height;
+    }
     /**
      * 延迟关闭
      *

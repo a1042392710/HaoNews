@@ -8,6 +8,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <!--fitsSystemWindows的意思是否将此布局延伸到状态栏-->
+      <!--两种形式实现透明状态栏，一种是使用style里定义的样式BaseTheme，随后设置布局里的fitsSystemWindows为True,然后设置PadingTop，就可以实现-->
+    <!--一种是通过BaseActivity中的代码来实现透明状态栏和给系统状态栏填充View的颜色来实现,这里用的这种-->
     <style name="BaseTheme" parent="AppTheme"/>
+
+    <!-- 首页（第一级页面不让Activity透明） -->
+    <style name="mainPageStyle" parent="AppTheme">
+        <item name="android:windowIsTranslucent">false</item>·
+    </style>
+
+    <!-- 非首页（非第一级页面让Activity透明） -->
+    <style name="otherPageStyle" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="lines">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">#99cccccc</item>
+    </style>
 
 </resources>

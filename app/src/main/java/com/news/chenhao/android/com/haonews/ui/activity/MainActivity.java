@@ -1,16 +1,16 @@
 package com.news.chenhao.android.com.haonews.ui.activity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.support.v4.app.FragmentTransaction;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.news.chenhao.android.com.haonews.R;
 import com.news.chenhao.android.com.haonews.base.BaseActivity;
 import com.news.chenhao.android.com.haonews.base.BasePresenter;
-import com.news.chenhao.android.com.haonews.until.AnimationUtil;
+import com.news.chenhao.android.com.haonews.ui.fragment.FragmentAnecdotes;
+import com.news.chenhao.android.com.haonews.ui.fragment.FragmentHome;
+import com.news.chenhao.android.com.haonews.ui.fragment.FragmentSetting;
 
 import butterknife.BindView;
 
@@ -21,18 +21,21 @@ import butterknife.BindView;
 public class MainActivity extends BaseActivity {
 
 
-    @BindView(R.id.title)
-    TextView title;
+    private FragmentHome fragmentHome;   //首页
+
+    private FragmentSetting fragmentSetting; //设置
+
+    private FragmentAnecdotes fragmentAnecdotes;//趣闻
+
     @BindView(R.id.bottonBar)
     BottomNavigationBar bottonBar;
-    @BindView(R.id.imgProgress)
-    ImageView imgProgress;
 
     @Override
+
     protected int getResViewId() {
         return R.layout.activity_main;
-
     }
+
     @Override
     protected BasePresenter getPresenter() {
         return null;
@@ -40,6 +43,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        //给已经设置为透明的状态，填充一个有颜色的View 来达到变色效果
+        addWindowsView();
         bottonBar
                 .addItem(new BottomNavigationItem(R.drawable.home_off, "首页"))
                 .addItem(new BottomNavigationItem(R.drawable.anecdotes_on, "趣闻"))
@@ -48,33 +53,28 @@ public class MainActivity extends BaseActivity {
                 .initialise();
 //        bottonBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE);  点击的时候有水波纹，然后变色
         onLinsen();//监听事件
+        //设置默认选中首页
+        selectTab(0);
     }
+
 
     /**
      * 监听事件
      */
     private void onLinsen() {
-        imgProgress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //设置自转动画
-                AnimationUtil.rotationAnimation(imgProgress);
-            }
-        });
-
         bottonBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position) {
                 //未选中 -> 选中
                 switch (position) {
                     case 0:
-                        showToast("首页");
+                        selectTab(position);
                         break;
                     case 1:
-                        showToast("趣闻");
+                        selectTab(position);
                         break;
                     case 2:
-                        showToast("设置");
+                        selectTab(position);
                         break;
 
                 }
@@ -90,6 +90,67 @@ public class MainActivity extends BaseActivity {
                 //选中 -> 选中
             }
         });
+    }
+
+
+    /**
+     * 切换页面
+     *
+     * @param position
+     */
+
+    private void selectTab(int position) {
+        //首先开启一个Fragment事物
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        //隐藏所有的Framgnet ，以防有多个Fragment显示在页面上
+        hideFragment(fragmentTransaction);
+        switch (position) {
+            case 0:
+                if (fragmentHome == null) {
+                    fragmentHome = new FragmentHome();
+                    fragmentTransaction.add(R.id.frameLayout, fragmentHome);
+                } else {
+                    fragmentTransaction.show(fragmentHome);
+                }
+                break;
+
+            case 1:
+                if (fragmentAnecdotes == null) {
+                    fragmentAnecdotes = new FragmentAnecdotes();
+                    fragmentTransaction.add(R.id.frameLayout, fragmentAnecdotes);
+                } else {
+                    fragmentTransaction.show(fragmentAnecdotes);
+                }
+                break;
+            case 2:
+                if (fragmentSetting == null) {
+                    fragmentSetting = new FragmentSetting();
+                    fragmentTransaction.add(R.id.frameLayout, fragmentSetting);
+                } else {
+                    fragmentTransaction.show(fragmentSetting);
+                }
+                break;
+        }
+        //提交事物
+        fragmentTransaction.commit();
+
+    }
+
+
+    /**
+     * 隐藏所有的Ftagment
+     */
+    private void hideFragment(FragmentTransaction transaction) {
+        if (fragmentHome != null) {
+            transaction.hide(fragmentHome);
+        }
+        if (fragmentAnecdotes != null) {
+            transaction.hide(fragmentAnecdotes);
+        }
+        if (fragmentSetting != null) {
+            transaction.hide(fragmentSetting);
+        }
+
     }
 
 }
