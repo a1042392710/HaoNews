@@ -52,9 +52,9 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         //照片123
         Glide.with(context).load(data.get(position).getThumbnail_pic_s()).centerCrop().error(R.drawable.no_photo)
                 .into(viewHolder.imgPhoto1);
-        Glide.with(context).load(data.get(position).getThumbnail_pic_s()).centerCrop().error(R.drawable.no_photo)
+        Glide.with(context).load(data.get(position).getThumbnail_pic_s02()).centerCrop().error(R.drawable.no_photo)
                 .into(viewHolder.imgPhoto2);
-        Glide.with(context).load(data.get(position).getThumbnail_pic_s()).centerCrop().error(R.drawable.no_photo)
+        Glide.with(context).load(data.get(position).getThumbnail_pic_s03()).centerCrop().error(R.drawable.no_photo)
                 .into(viewHolder.imgPhoto3);
         if (position == data.size() - 1) {
             viewHolder.mView.setVisibility(View.INVISIBLE);
