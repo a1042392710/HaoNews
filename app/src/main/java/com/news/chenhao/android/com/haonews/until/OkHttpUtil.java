@@ -70,7 +70,8 @@ public class OkHttpUtil {
             @Override
             public void run() {
                 //根据公司需要，拼接接口  和携带参数（params）
-                StringBuilder urlSb = new StringBuilder(url + method);
+                StringBuilder urlSb = new StringBuilder(url); //这里不需要方法参数
+//                StringBuilder urlSb = new StringBuilder(url + method);
                 if (params != null && !params.isEmpty()) {
                     params.put("key", ConstantAPI.API_NEWS_KEY);
                     urlSb.append("?");

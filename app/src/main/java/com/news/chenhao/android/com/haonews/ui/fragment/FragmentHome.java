@@ -20,9 +20,7 @@ import com.news.chenhao.android.com.haonews.presenter.HomePresenter;
 import com.news.chenhao.android.com.haonews.ui.adapter.HomeRecyclerAdapter;
 import com.news.chenhao.android.com.haonews.ui.view.IHomeView;
 import com.news.chenhao.android.com.haonews.until.AnimationUtil;
-import com.news.chenhao.android.com.haonews.until.DividerItemDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -74,8 +72,8 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
      */
     private void getDate() {
         ArrayMap<String, Object> params = new ArrayMap<>();
-        params.put("type", "top");
-        mPresenter.searchList(ConstantAPI.API_NEWS_TOP, params);
+        params.put(ConstantAPI.API_TYPE, ConstantAPI.API_NEWS_TOP);
+        mPresenter.searchList(null, params);
     }
 
     private void initRecyclerView() {
@@ -84,18 +82,22 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
         xRecyclerView.setLayoutManager(layoutManager);
         xRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         xRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.Pacman);
-//        xRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST));
+        xRecyclerView.setLoadingMoreEnabled(false);//关闭上拉加载
         xRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                //上拉刷新
+                showToast("我是下拉");
+                //下拉刷新
                 getDate();
+
             }
 
             @Override
             public void onLoadMore() {
-                //下拉加载
+                showToast("我是上拉");
+                //上拉加载
                 getDate();
+
             }
         });
     }
@@ -108,26 +110,44 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
     }
 
 
-    @OnClick(R.id.imgProgress)
-    public void onViewClicked() {
-        AnimationUtil.rotationAnimation(imgProgress);
-    }
-
     @Override
     public void isSuccessful(HomeNew homeNews) {
-        if (xRecyclerView.getVisibility()==View.GONE){
+        if (xRecyclerView.getVisibility() == View.GONE) {
             xRecyclerView.setVisibility(View.VISIBLE);
             imgNogprs.setVisibility(View.GONE);
         }
         List<HomeNew.Data> data = homeNews.getResult().getData();
-        mAdapter = new HomeRecyclerAdapter(data);
+        mAdapter = new HomeRecyclerAdapter(data,mContext);
         xRecyclerView.setAdapter(mAdapter);
+        xRecyclerView.refreshComplete();//关闭下拉刷新
+        xRecyclerView.loadMoreComplete();//关闭下拉加载
     }
 
     @Override
     public void isFailure(String msg) {
         showToast(msg);
-        xRecyclerView.setVisibility(View.GONE);
-        imgNogprs.setVisibility(View.VISIBLE);
+        if (xRecyclerView.getVisibility() == View.VISIBLE) {
+            xRecyclerView.setVisibility(View.GONE);
+            imgNogprs.setVisibility(View.VISIBLE);
+        }
+        xRecyclerView.refreshComplete();//关闭下拉刷新动画
+        xRecyclerView.loadMoreComplete();//关闭下拉加载动画
+    }
+
+
+    @OnClick({R.id.imgProgress, R.id.img_nogprs})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.imgProgress:
+                //动画
+                AnimationUtil.rotationAnimation(imgProgress);
+                //重新获取数据
+                getDate();
+                break;
+            case R.id.img_nogprs:
+                //重新获取数据
+                getDate();
+                break;
+        }
     }
 }
