@@ -3,32 +3,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/relativelayout"
-            android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:minHeight="?attr/actionBarSize">
+            android:layout_centerInParent="true"
+            android:text="头条新闻"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="normal"/>
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="头条新闻"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:typeface="normal"/>
+        <ImageView
+            android:id="@+id/imgProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/login"/>
+    </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/imgProgress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/login"/>
-        </RelativeLayout>
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativelayout"
+        android:layout_margin="5dp"/>
 
+    <ImageView
+        android:id="@+id/img_nogprs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:src="@drawable/no_gprs"/>
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
 
+import com.news.chenhao.android.com.haonews.base.ConstantAPI;
 import com.news.chenhao.android.com.haonews.ui.view.Http4byteCallback;
 import com.news.chenhao.android.com.haonews.ui.view.HttpCallback;
 
@@ -71,6 +72,7 @@ public class OkHttpUtil {
                 //根据公司需要，拼接接口  和携带参数（params）
                 StringBuilder urlSb = new StringBuilder(url + method);
                 if (params != null && !params.isEmpty()) {
+                    params.put("key", ConstantAPI.API_NEWS_KEY);
                     urlSb.append("?");
                     for (Map.Entry<String, Object> entry : params.entrySet()) {
                         urlSb.append(entry.getKey());

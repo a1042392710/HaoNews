@@ -256,7 +256,7 @@ public class GetPictureUtil {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, mCropImg);
         intent.putExtra("return-data", false);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        intent.putExtra("noFaceDetection", true); // no face detection
+        intent.putExtra("noFaceDetection", true); // no_gprs face detection
         startActivityForResult(intent, mRequestCode);
     }
 
