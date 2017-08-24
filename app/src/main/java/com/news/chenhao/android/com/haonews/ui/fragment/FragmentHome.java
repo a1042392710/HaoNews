@@ -71,6 +71,7 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
      * 获取数据
      */
     private void getDate() {
+        showProgressDialog("浩欧巴在努力的加载数据");
         ArrayMap<String, Object> params = new ArrayMap<>();
         params.put(ConstantAPI.API_TYPE, ConstantAPI.API_NEWS_TOP);
         mPresenter.searchList(null, params);
@@ -86,7 +87,6 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
         xRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                showToast("我是下拉");
                 //下拉刷新
                 getDate();
 
@@ -94,7 +94,6 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
 
             @Override
             public void onLoadMore() {
-                showToast("我是上拉");
                 //上拉加载
                 getDate();
 
@@ -112,6 +111,7 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     public void isSuccessful(HomeNew homeNews) {
+        dismissDialogDialog();
         if (xRecyclerView.getVisibility() == View.GONE) {
             xRecyclerView.setVisibility(View.VISIBLE);
             imgNogprs.setVisibility(View.GONE);
@@ -125,6 +125,7 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     public void isFailure(String msg) {
+        dismissDialogDialog();
         showToast(msg);
         if (xRecyclerView.getVisibility() == View.VISIBLE) {
             xRecyclerView.setVisibility(View.GONE);
