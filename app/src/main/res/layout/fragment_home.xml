@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:id="@+id/relativelayout"
@@ -16,7 +17,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="头条新闻"
-            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             android:typeface="normal"/>
@@ -31,12 +31,22 @@
             android:src="@drawable/login"/>
     </RelativeLayout>
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_below="@+id/relativelayout"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabIndicatorColor="@color/colorPrimary"
+        android:layout_width="match_parent"
+        app:tabMode="scrollable"
+        android:background="@color/gainsboro"
+        android:layout_height="wrap_content"/>
+
+
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativelayout"
-        android:paddingTop="5dp"
+        android:layout_below="@+id/tab_layout"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"/>
 

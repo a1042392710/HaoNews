@@ -1,5 +1,6 @@
 package com.news.chenhao.android.com.haonews.ui.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -39,6 +40,7 @@ public class FragmentAnecdotes extends BaseFragment {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        title.setTextColor(Color.WHITE);
     }
 
 

@@ -1,6 +1,8 @@
 package com.news.chenhao.android.com.haonews.ui.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -44,6 +46,8 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
     XRecyclerView xRecyclerView;
     @BindView(R.id.img_nogprs)
     ImageView imgNogprs;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
 
     private HomeRecyclerAdapter mAdapter;
 
@@ -59,12 +63,34 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        title.setTextColor(Color.WHITE);
+        // 初始化tabLayout的信息
+        initTabLayoutData();
         /**
          * 初始化XRV
          */
         initRecyclerView();
         //获取数据
         getDate();
+    }
+
+    /**
+     * 初始化tabLayout的信息
+     */
+
+    private void initTabLayoutData() {
+        tabLayout.addTab(tabLayout.newTab().setText("头条"));
+        tabLayout.addTab(tabLayout.newTab().setText("社会"));
+        tabLayout.addTab(tabLayout.newTab().setText("国内"));
+        tabLayout.addTab(tabLayout.newTab().setText("国际"));
+        tabLayout.addTab(tabLayout.newTab().setText("娱乐"));
+        tabLayout.addTab(tabLayout.newTab().setText("体育"));
+        tabLayout.addTab(tabLayout.newTab().setText("军事"));
+        tabLayout.addTab(tabLayout.newTab().setText("科技"));
+        tabLayout.addTab(tabLayout.newTab().setText("财经"));
+        tabLayout.addTab(tabLayout.newTab().setText("时尚"));
+
+
     }
 
     /**
@@ -117,7 +143,7 @@ public class FragmentHome extends BaseFragment<HomePresenter> implements IHomeVi
             imgNogprs.setVisibility(View.GONE);
         }
         List<HomeNew.Data> data = homeNews.getResult().getData();
-        mAdapter = new HomeRecyclerAdapter(data,mContext);
+        mAdapter = new HomeRecyclerAdapter(data, mContext);
         xRecyclerView.setAdapter(mAdapter);
         xRecyclerView.refreshComplete();//关闭下拉刷新
         xRecyclerView.loadMoreComplete();//关闭下拉加载

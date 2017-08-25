@@ -46,7 +46,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         mApp = (BaseApplication) getApplication();
         mApp.addActivity(this);
         mContext = this;
-        translucentStatusBar(); //透明状态栏状态栏
+        translucentStatusBar(); //透明状态栏
         setContentView(getResViewId());
         ButterKnife.bind(this);//注解框架的实例化
         im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);//输入法管理器实例化
@@ -170,10 +170,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     /**
      *  创建View并添加到状态栏
      */
-    protected void addWindowsView() {
+    protected void addWindowsView(int Color) {
 
         View view = new View(mContext);
-        view.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        view.setBackgroundColor(getResources().getColor(Color));
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams
                 .MATCH_PARENT,
                 getStatusBarHeight());
