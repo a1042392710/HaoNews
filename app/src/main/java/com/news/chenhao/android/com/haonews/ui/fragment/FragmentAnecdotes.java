@@ -26,7 +26,6 @@ public class FragmentAnecdotes extends BaseFragment {
     ImageView imgProgress;
     @BindView(R.id.relativelayout)
     RelativeLayout relativelayout;
-    Unbinder unbinder;
 
     @Override
     protected BasePresenter getPresenter() {
@@ -44,11 +43,6 @@ public class FragmentAnecdotes extends BaseFragment {
     }
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 
 
     @OnClick(R.id.imgProgress)

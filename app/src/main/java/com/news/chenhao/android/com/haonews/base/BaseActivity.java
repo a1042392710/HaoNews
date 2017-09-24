@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
@@ -22,6 +23,7 @@ import com.news.chenhao.android.com.haonews.R;
 import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by chenhao on 2017/4/10.
@@ -39,6 +41,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     protected InputMethodManager im;//输入法的管理器
     protected BaseApplication mApp;//apcation
     protected Handler mHandler;
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         mContext = this;
         translucentStatusBar(); //透明状态栏
         setContentView(getResViewId());
-        ButterKnife.bind(this);//注解框架的实例化
+        unbinder=   ButterKnife.bind(this);//注解框架的实例化
         im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);//输入法管理器实例化
         mHandler = new Handler(this);
         mPresenter = getPresenter();
@@ -167,8 +170,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             }
         }
     }
+
     /**
-     *  创建View并添加到状态栏
+     * 创建View并添加到状态栏
      */
     protected void addWindowsView(int Color) {
 
@@ -182,7 +186,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     /**
-     *  获得顶部ActionBar 的高度
+     * 获得顶部ActionBar 的高度
      */
     protected int getStatusBarHeight() {
         Resources resources = mContext.getResources();
@@ -190,6 +194,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         int height = resources.getDimensionPixelSize(resourceId);
         return height;
     }
+
     /**
      * 延迟关闭
      *
@@ -213,7 +218,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     //初始化
     protected abstract void initData(Bundle savedInstanceState);
 
-    protected void handleMessage(Message msg) { }
+    protected void handleMessage(Message msg) {
+    }
 
     @Override
     protected void onRestart() {
@@ -233,6 +239,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     @Override
     protected void onDestroy() {
         mApp.removeActivity(this);
+        if (unbinder!=null){
+            unbinder.unbind();
+        }
         super.onDestroy();
     }
 }

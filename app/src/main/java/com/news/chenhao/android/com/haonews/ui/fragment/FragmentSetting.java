@@ -22,7 +22,6 @@ import butterknife.Unbinder;
 public class FragmentSetting extends BaseFragment {
     @BindView(R.id.title)
     TextView title;
-    Unbinder unbinder;
 
     @Override
     protected BasePresenter getPresenter() {
@@ -40,9 +39,4 @@ public class FragmentSetting extends BaseFragment {
     }
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 }

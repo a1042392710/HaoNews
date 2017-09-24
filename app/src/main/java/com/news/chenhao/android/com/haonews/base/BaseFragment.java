@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Fragment基础类
@@ -34,6 +35,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     protected InputMethodManager im;//键盘管理器
     protected Handler mHandler;
     protected Toast mToast;
+    private Unbinder unbinder;
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -51,7 +53,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         super.onAttach(context);
         attach(context);
     }
-
 
 
     private void attach(Context context) {
@@ -76,7 +77,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         if (parent != null) {
             parent.removeView(mRootView);
         }
-        ButterKnife.bind(this, mRootView);
+        unbinder = ButterKnife.bind(this, mRootView);
         return mRootView;
     }
 
@@ -122,6 +123,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
 
     @Override
     public void onDestroyView() {
+
+        if (unbinder != null) {
+            unbinder.unbind(); //注解框架解绑
+        }
         if (isInit) {
             cancelRequest();
         }
@@ -207,7 +212,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         }
     }
 
-    protected void handleMessage(Message msg) { }
+    protected void handleMessage(Message msg) {
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     //
@@ -229,5 +235,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     protected abstract void initData(Bundle savedInstanceState);
 
     //取消请求
-    public void cancelRequest() {}
+    public void cancelRequest() {
+    }
 }

@@ -7,7 +7,7 @@ import com.news.chenhao.android.com.haonews.model.entity.HomeNew;
  * Created by haobaobao on 2017/8/22.
  */
 
-public interface IHomeView extends IBaseView {
+public interface IFragmentHomeTopView extends IBaseView {
 
     void isSuccessful(HomeNew data);
 

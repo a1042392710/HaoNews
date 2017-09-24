@@ -41,21 +41,9 @@
         android:background="@color/gainsboro"
         android:layout_height="wrap_content"/>
 
-
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/xRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tab_layout"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"/>
-
-    <ImageView
-        android:id="@+id/img_nogprs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_centerInParent="true"
-        android:src="@drawable/no_gprs"/>
-
+<android.support.v4.view.ViewPager
+    android:id="@+id/viewPager"
+    android:layout_below="@+id/tab_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
 </RelativeLayout>

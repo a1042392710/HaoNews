@@ -69,11 +69,6 @@ public class OkHttpUtil {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(1000); //休眠1秒
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 //根据公司需要，拼接接口  和携带参数（params）
                 StringBuilder urlSb = new StringBuilder(url); //这里不需要方法参数
 //                StringBuilder urlSb = new StringBuilder(url + method);

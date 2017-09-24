@@ -21,4 +21,8 @@ public class HomeModel extends BaseModel {
     public void getRequest( String method, ArrayMap<String, Object> params, HttpCallback callback) {
         mOkHttpUtil.doGetRequest(ConstantAPI.API_NEWS, method, params, callback);
     }
+
+
+
+
 }

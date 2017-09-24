@@ -1,32 +1,28 @@
 package com.news.chenhao.android.com.haonews.presenter;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.util.ArrayMap;
 
 import com.google.gson.Gson;
 import com.news.chenhao.android.com.haonews.base.BasePresenter;
-import com.news.chenhao.android.com.haonews.base.ConsTant;
-import com.news.chenhao.android.com.haonews.base.ConstantAPI;
 import com.news.chenhao.android.com.haonews.model.HomeModel;
 import com.news.chenhao.android.com.haonews.model.entity.HomeNew;
 import com.news.chenhao.android.com.haonews.ui.view.HttpCallback;
-import com.news.chenhao.android.com.haonews.ui.view.IHomeView;
+import com.news.chenhao.android.com.haonews.ui.view.IFragmentHomeTopView;
 
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Response;
 
-import android.support.v4.util.ArrayMap;
-
 /**
  * Created by haobaobao on 2017/8/22.
  */
 
-public class HomePresenter extends BasePresenter<IHomeView> {
+public class HomeTopPresenter extends BasePresenter<IFragmentHomeTopView> {
     private HomeModel homeModel;
 
-    public HomePresenter(Fragment fragment, IHomeView view) {
+    public HomeTopPresenter(Fragment fragment, IFragmentHomeTopView view) {
         super(fragment, view);
         homeModel = new HomeModel(fragment);
     }
