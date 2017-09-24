@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#F1F1F1">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="#F1F1F1">
 
     <RelativeLayout
         android:id="@+id/relativelayout"
         android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/title"
         android:background="@color/colorPrimary">
 
         <TextView
@@ -18,13 +18,13 @@
             android:layout_centerInParent="true"
             android:text="设置"
             android:textColor="@color/white"
-            android:textSize="20sp"/>
+            android:textSize="17sp"/>
     </RelativeLayout>
 
     <ScrollView
-        android:layout_below="@+id/relativelayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativelayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/my_like"/>
 
                 <TextView
                     android:id="@+id/text_collection"
@@ -54,9 +54,10 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/img_collection"
                     android:drawableRight="@drawable/ic_right"
+                    android:gravity="center_vertical"
                     android:paddingRight="10dp"
                     android:text="我的收藏"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
                 <View
@@ -78,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/moon_mode"/>
 
                 <TextView
                     android:id="@+id/text_night_mode"
@@ -86,15 +87,18 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/img_night_mode"
+                    android:gravity="center_vertical"
                     android:text="夜间模式"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
-                <Switch
+                <android.support.v7.widget.SwitchCompat
                     android:id="@+id/switch_night_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    app:switchMinWidth="55dp"
+                    style="@style/Button"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"/>
 
@@ -117,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/sun"/>
 
                 <TextView
                     android:id="@+id/text_brightness_adjustment"
@@ -125,17 +129,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/img_brightness_adjustment"
+                    android:gravity="center_vertical"
                     android:text="调整亮度"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
-                <Switch
-                    android:id="@+id/switch_brightness_adjustment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"/>
 
                 <View
                     style="@style/lines"
@@ -157,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/click"/>
 
                 <TextView
                     android:id="@+id/text_close_text"
@@ -165,23 +163,29 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/img_close_text"
+                    android:gravity="center_vertical"
                     android:text="双击关闭文章"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
-                <Switch
+                <View
+                    android:background="#99cccccc"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"/>
+
+                <android.support.v7.widget.SwitchCompat
                     android:id="@+id/switch_close_text"
                     android:layout_width="wrap_content"
+                    app:switchMinWidth="55dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"/>
-
-                <View
-                    style="@style/lines"
-                    android:layout_alignLeft="@+id/text_close_text"
-                    android:layout_alignParentBottom="true"/>
+                    android:layout_marginRight="10dp"
+                    android:layout_alignTop="@+id/img_close_text"
+                    android:layout_alignParentEnd="true"
+                    style="@style/Button"
+                    android:layout_marginEnd="11dp"/>
             </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/relative_five"
@@ -190,6 +194,11 @@
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/select_background"
                 android:clickable="true">
+                <View
+                    android:background="#99cccccc"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentTop="true"/>
 
                 <ImageView
                     android:id="@+id/img_clear_cache"
@@ -197,7 +206,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/rubbish"/>
 
                 <TextView
                     android:id="@+id/text_clear_cache"
@@ -206,14 +215,16 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/img_clear_cache"
                     android:drawableRight="@drawable/ic_right"
+                    android:gravity="center_vertical"
                     android:paddingRight="10dp"
                     android:text="清除缓存"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
                 <View
-                    style="@style/lines"
-                    android:layout_alignLeft="@+id/text_clear_cache"
+                    android:background="#99cccccc"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
                     android:layout_alignParentBottom="true"/>
             </RelativeLayout>
 
@@ -223,14 +234,18 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/select_background"
                 android:clickable="true">
-
+                <View
+                    android:background="#99cccccc"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentTop="true"/>
                 <ImageView
                     android:id="@+id/img_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/star"/>
 
                 <TextView
                     android:id="@+id/text_score"
@@ -239,9 +254,10 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/img_score"
                     android:drawableRight="@drawable/ic_right"
+                    android:gravity="center_vertical"
                     android:paddingRight="10dp"
                     android:text="为我们打分"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
                 <View
@@ -263,7 +279,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/share"/>
 
                 <TextView
                     android:id="@+id/text_share"
@@ -272,9 +288,10 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/img_share"
                     android:drawableRight="@drawable/ic_right"
+                    android:gravity="center_vertical"
                     android:paddingRight="10dp"
                     android:text="分享"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
                 <View
@@ -296,7 +313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/notice"/>
 
                 <TextView
                     android:id="@+id/text_feed_back"
@@ -305,9 +322,10 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/img_feed_back"
                     android:drawableRight="@drawable/ic_right"
+                    android:gravity="center_vertical"
                     android:paddingRight="10dp"
                     android:text="意见反馈"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
                 <View
@@ -329,7 +347,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/book"/>
 
                 <TextView
                     android:id="@+id/text_user_agreement"
@@ -338,9 +356,10 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/img_user_agreement"
                     android:drawableRight="@drawable/ic_right"
+                    android:gravity="center_vertical"
                     android:paddingRight="10dp"
                     android:text="用户协议"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
                 <View
@@ -362,7 +381,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/verson_sn"/>
 
                 <TextView
                     android:id="@+id/text_current_version"
@@ -370,8 +389,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/img_current_version"
+                    android:gravity="center_vertical"
                     android:text="当前版本"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
                 <TextView
@@ -382,12 +402,13 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:text="1.0"
-                    android:textColor="#333333"
+                    android:textColor="#222222"
                     android:textSize="13sp"/>
 
                 <View
-                    style="@style/lines"
-                    android:layout_alignLeft="@+id/text_current_version"
+                    android:background="#99cccccc"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
                     android:layout_alignParentBottom="true"/>
             </RelativeLayout>
 
