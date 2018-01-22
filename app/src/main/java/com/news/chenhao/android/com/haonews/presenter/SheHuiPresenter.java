@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import com.google.gson.Gson;
 import com.news.chenhao.android.com.haonews.base.BasePresenter;
 import com.news.chenhao.android.com.haonews.model.HomeModel;
-import com.news.chenhao.android.com.haonews.model.entity.HomeNew;
+import com.news.chenhao.android.com.haonews.model.entity.HaoNews;
 import com.news.chenhao.android.com.haonews.ui.view.HttpCallback;
 import com.news.chenhao.android.com.haonews.ui.view.ISheHuiView;
 
@@ -38,7 +38,7 @@ public class SheHuiPresenter extends BasePresenter<ISheHuiView> {
 
             @Override
             public void onResponse(Call call, Response response, String bodyStr) throws IOException {
-                HomeNew homeNew = new Gson().fromJson(bodyStr, HomeNew.class);
+                HaoNews homeNew = new Gson().fromJson(bodyStr, HaoNews.class);
                 mView.isSuccessful(homeNew);
             }
         });

@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:background="#F1F1F1">
+                android:background="#fff">
 
     <RelativeLayout
         android:id="@+id/relativelayout"
@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/select_background"
+                
                 android:clickable="true">
 
                 <ImageView
@@ -70,7 +70,7 @@
                 android:id="@+id/relative_two"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/select_background"
+                
                 android:clickable="true">
 
                 <ImageView
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     app:switchMinWidth="55dp"
-                    style="@style/Button"
+                    android:background="#fff"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"/>
 
@@ -112,7 +112,7 @@
                 android:id="@+id/relative_three"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/select_background"
+                
                 android:clickable="true">
 
                 <ImageView
@@ -146,7 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:background="@drawable/select_background"
+                
                 android:clickable="true">
 
                 <ImageView
@@ -180,9 +180,9 @@
                     app:switchMinWidth="55dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
+                    android:background="#fff"
                     android:layout_alignTop="@+id/img_close_text"
                     android:layout_alignParentEnd="true"
-                    style="@style/Button"
                     android:layout_marginEnd="11dp"/>
             </RelativeLayout>
 
@@ -192,7 +192,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:background="@drawable/select_background"
+                
                 android:clickable="true">
                 <View
                     android:background="#99cccccc"
@@ -232,7 +232,7 @@
                 android:id="@+id/relative_six"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/select_background"
+                
                 android:clickable="true">
                 <View
                     android:background="#99cccccc"
@@ -270,7 +270,7 @@
                 android:id="@+id/relative_seven"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/select_background"
+                
                 android:clickable="true">
 
                 <ImageView
@@ -304,7 +304,6 @@
                 android:id="@+id/relative_eight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/select_background"
                 android:clickable="true">
 
                 <ImageView
@@ -338,7 +337,6 @@
                 android:id="@+id/relative_nine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/select_background"
                 android:clickable="true">
 
                 <ImageView
@@ -372,7 +370,7 @@
                 android:id="@+id/relative_ten"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/select_background"
+                
                 android:clickable="true">
 
                 <ImageView

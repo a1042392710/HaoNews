@@ -11,24 +11,22 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.news.chenhao.android.com.haonews.R;
 import com.news.chenhao.android.com.haonews.base.BaseFragment;
 import com.news.chenhao.android.com.haonews.base.ConstantAPI;
-import com.news.chenhao.android.com.haonews.model.entity.HomeNew;
-import com.news.chenhao.android.com.haonews.presenter.HomeTopPresenter;
-import com.news.chenhao.android.com.haonews.presenter.SheHuiPresenter;
+import com.news.chenhao.android.com.haonews.model.entity.HaoNews;
+import com.news.chenhao.android.com.haonews.presenter.FragmentNewsPresenter;
 import com.news.chenhao.android.com.haonews.ui.adapter.HomeRecyclerAdapter;
-import com.news.chenhao.android.com.haonews.ui.view.ISheHuiView;
-import com.news.chenhao.android.com.haonews.until.CollectionsUtil;
+import com.news.chenhao.android.com.haonews.ui.view.IFragmentNewsView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by haobaobao on 2017/9/24.
  */
 
-public class FragmentHomeSheHui extends BaseFragment<SheHuiPresenter> implements ISheHuiView {
+public class FragmentNews extends BaseFragment<FragmentNewsPresenter> implements IFragmentNewsView {
 
     @BindView(R.id.xRecyclerView)
     XRecyclerView xRecyclerView;
@@ -36,11 +34,13 @@ public class FragmentHomeSheHui extends BaseFragment<SheHuiPresenter> implements
     ImageView imgNogprs;
 
     private HomeRecyclerAdapter mAdapter;
+    private String mApi;//查询条件
+    private List<HaoNews> mList = new ArrayList<>();
 
 
     @Override
-    protected SheHuiPresenter getPresenter() {
-        return new SheHuiPresenter(this,this);
+    protected FragmentNewsPresenter getPresenter() {
+        return new FragmentNewsPresenter(this, this);
     }
 
     @Override
@@ -50,21 +50,23 @@ public class FragmentHomeSheHui extends BaseFragment<SheHuiPresenter> implements
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        mApi = getArguments().getString(ConstantAPI.API_TYPE, ConstantAPI.API_NEWS_TOP);
         /**
-         * 初始化XRV
+         * 初始化列表
          */
         initRecyclerView();
         //获取数据
-        getDate();
+        getDate(mApi);
     }
 
     /**
      * 获取数据
      */
-    private void getDate() {
+    public void getDate(String api) {
+        this.mApi = api;
         showProgressDialog("浩欧巴在努力的加载数据");
         ArrayMap<String, Object> params = new ArrayMap<>();
-        params.put(ConstantAPI.API_TYPE,ConstantAPI.API_NEWS_SHEHUI);
+        params.put(ConstantAPI.API_TYPE, api);
         mPresenter.searchList(null, params);
     }
 
@@ -79,34 +81,32 @@ public class FragmentHomeSheHui extends BaseFragment<SheHuiPresenter> implements
             @Override
             public void onRefresh() {
                 //下拉刷新
-                getDate();
+                getDate(mApi);
+
             }
 
             @Override
             public void onLoadMore() {
                 //上拉加载
-                getDate();
+                getDate(mApi);
 
             }
         });
     }
 
 
-
-
     @Override
-    public void isSuccessful(HomeNew homeNews) {
+    public void isSuccessful(List<HaoNews> homeNews) {
+        this.mList.clear();
+        mList.addAll(homeNews);
         dismissDialogDialog();
         if (xRecyclerView.getVisibility() == View.GONE) {
             xRecyclerView.setVisibility(View.VISIBLE);
             imgNogprs.setVisibility(View.GONE);
         }
-        if (homeNews.getResult()!=null) {
-            List<HomeNew.Data> data = homeNews.getResult().getData();
-            if (!CollectionsUtil.isEmpty(data)) {
-                mAdapter = new HomeRecyclerAdapter(data, mContext);
+        if (mList != null) {
+                mAdapter = new HomeRecyclerAdapter(mList, mContext);
                 xRecyclerView.setAdapter(mAdapter);
-            }
         }
         xRecyclerView.refreshComplete();//关闭下拉刷新动画
         xRecyclerView.loadMoreComplete();//关闭下拉加载动画
@@ -125,13 +125,13 @@ public class FragmentHomeSheHui extends BaseFragment<SheHuiPresenter> implements
     }
 
 
-    @OnClick({ R.id.img_nogprs})
+    @OnClick({R.id.img_nogprs})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
             case R.id.img_nogprs:
                 //重新获取数据
-                getDate();
+                getDate(mApi);
                 break;
         }
     }

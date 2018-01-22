@@ -13,13 +13,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.news.chenhao.android.com.haonews.R;
 import com.news.chenhao.android.com.haonews.base.ConstantAPI;
-import com.news.chenhao.android.com.haonews.model.entity.HomeNew;
-import com.news.chenhao.android.com.haonews.ui.activity.MainActivity;
+import com.news.chenhao.android.com.haonews.model.entity.HaoNews;
 import com.news.chenhao.android.com.haonews.ui.activity.NewsWebActivity;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,9 +25,9 @@ import java.util.List;
 public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder> {
 
     private Context context;
-    private List<HomeNew.Data> data = null;
+    private List<HaoNews> data = null;
 
-    public HomeRecyclerAdapter(List<HomeNew.Data> data, Context context) {
+    public HomeRecyclerAdapter(List<HaoNews> data, Context context) {
         this.data = data;
         this.context = context;
     }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.news.chenhao.android.com.haonews.R;
 import com.news.chenhao.android.com.haonews.base.BaseFragment;
+import com.news.chenhao.android.com.haonews.base.ConstantAPI;
 import com.news.chenhao.android.com.haonews.presenter.SheHuiPresenter;
 import com.news.chenhao.android.com.haonews.ui.adapter.FragmentHomeAdapter;
 import com.news.chenhao.android.com.haonews.ui.adapter.HomeRecyclerAdapter;
@@ -40,11 +41,11 @@ public class FragmentHome extends BaseFragment {
     TabLayout tabLayout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
-    private List<Fragment> list;
+    private List<Fragment> mFragmentList;
 
     private FragmentHomeAdapter mAdapter;
 
-    private int position = 0; //当前属于哪个标签
+    private int mPosition = 0; //记录当前页数
 
     @Override
     protected SheHuiPresenter getPresenter() {
@@ -69,18 +70,16 @@ public class FragmentHome extends BaseFragment {
      * 初始化ViewPager所需数据
      */
     private void initViewPager() {
-        list = new ArrayList<>();
-        list.add(new FragmentHomeTop());
-        list.add(new FragmentHomeSheHui());
-        list.add(new FragmentHomeTop());
-        list.add(new FragmentHomeTop());
-        list.add(new FragmentHomeTop());
-        list.add(new FragmentHomeTop());
-        list.add(new FragmentHomeTop());
-        list.add(new FragmentHomeTop());
-        list.add(new FragmentHomeTop());
-        list.add(new FragmentHomeTop());
-        mAdapter = new FragmentHomeAdapter(getFragmentManager(), list);
+        mFragmentList = new ArrayList<>();
+        //给每个页面设置不同的数据源
+        for (int i = 0; i < ConstantAPI.apiArray.length; i++) {
+            Bundle bundle = new Bundle();
+            bundle.putString(ConstantAPI.API_TYPE, ConstantAPI.apiArray[i]);
+            FragmentNews fragmentNews = new FragmentNews();
+            fragmentNews.setArguments(bundle);
+            mFragmentList.add(fragmentNews);
+        }
+        mAdapter = new FragmentHomeAdapter(getFragmentManager(), mFragmentList);
         viewPager.setAdapter(mAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
@@ -90,20 +89,14 @@ public class FragmentHome extends BaseFragment {
      */
 
     private void initTabLayoutData() {
-        tabLayout.addTab(tabLayout.newTab().setText("头条"));
-        tabLayout.addTab(tabLayout.newTab().setText("社会"));
-        tabLayout.addTab(tabLayout.newTab().setText("国内"));
-        tabLayout.addTab(tabLayout.newTab().setText("国际"));
-        tabLayout.addTab(tabLayout.newTab().setText("娱乐"));
-        tabLayout.addTab(tabLayout.newTab().setText("体育"));
-        tabLayout.addTab(tabLayout.newTab().setText("军事"));
-        tabLayout.addTab(tabLayout.newTab().setText("科技"));
-        tabLayout.addTab(tabLayout.newTab().setText("财经"));
-        tabLayout.addTab(tabLayout.newTab().setText("时尚"));
+
+        for (int i = 0; i < ConstantAPI.apiNameArray.length; i++) {
+            tabLayout.addTab(tabLayout.newTab().setText(ConstantAPI.apiNameArray[i]));
+        }
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                position = tab.getPosition();
+                mPosition = tab.getPosition();
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
@@ -123,13 +116,14 @@ public class FragmentHome extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.imgProgress:
-                //todo 9月24 待测试
                 //动画
                 AnimationUtil.rotationAnimation(imgProgress);
-                mAdapter = new FragmentHomeAdapter(getFragmentManager(), list);
-                //重新获取数据
-                viewPager.setAdapter(mAdapter);
-                viewPager.setCurrentItem(position);
+                FragmentNews fragmentNews = (FragmentNews) mFragmentList.get(mPosition);
+                fragmentNews.getDate(ConstantAPI.apiArray[mPosition]);
+//                mAdapter = new FragmentHomeAdapter(getFragmentManager(), mFragmentList);
+//                //重新获取数据
+//                viewPager.setAdapter(mAdapter);
+//                viewPager.setCurrentItem(mPosition);
                 break;
         }
     }

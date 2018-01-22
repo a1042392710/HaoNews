@@ -4,6 +4,7 @@ package com.news.chenhao.android.com.haonews.base;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
+import com.news.chenhao.android.com.haonews.until.JsonUtil;
 import com.news.chenhao.android.com.haonews.until.OkHttpUtil;
 import com.news.chenhao.android.com.haonews.until.SPUtil;
 
@@ -20,6 +21,7 @@ public abstract class BaseModel {
     protected Fragment mFragment;
     protected String mTag;
     protected SPUtil mSpUtil;
+    protected JsonUtil mJsonUtil;
     protected OkHttpUtil mOkHttpUtil;
 
     public BaseModel(AppCompatActivity activity) {
@@ -30,6 +32,7 @@ public abstract class BaseModel {
         mOkHttpUtil = new OkHttpUtil(mActivity, mTag);
         //存储的初始化
         mSpUtil = SPUtil.getInstance(mActivity);
+        mJsonUtil= JsonUtil.getInstance();
 
     }
 

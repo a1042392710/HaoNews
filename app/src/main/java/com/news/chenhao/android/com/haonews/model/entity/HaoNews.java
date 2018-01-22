@@ -7,76 +7,9 @@ import java.util.List;
  * Created by haobaobao on 2017/8/22.
  */
 
-public class HomeNew implements Serializable {
-    /**
-     * 请求返回的字符 ，成功或失败
-     */
-    private String reason;
-    /**
-     * 返回的结果
-     */
-    private Result result;
-    /**
-     * 失败返回码
-     */
-    private int error_code;
+public class HaoNews implements Serializable {
 
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
 
-    public String getReason() {
-        return reason;
-    }
-
-    public void setResult(Result result) {
-        this.result = result;
-    }
-
-    public Result getResult() {
-        return result;
-    }
-
-    public void setError_code(int error_code) {
-        this.error_code = error_code;
-    }
-
-    public int getError_code() {
-        return error_code;
-    }
-
-    /**
-     * 返回的结果
-     */
-    public class Result {
-        /**
-         * 成功码
-         */
-
-        private String stat;
-        /**
-         * 返回的数据源
-         */
-        private List<Data> data;
-
-        public void setStat(String stat) {
-            this.stat = stat;
-        }
-
-        public String getStat() {
-            return stat;
-        }
-
-        public void setData(List<Data> data) {
-            this.data = data;
-        }
-
-        public List<Data> getData() {
-            return data;
-        }
-    }
-
-    public class Data {
         /**
          * key
          */
@@ -186,4 +119,3 @@ public class HomeNew implements Serializable {
             return thumbnail_pic_s03;
         }
     }
-}
